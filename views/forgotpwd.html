@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forgotpwd?</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type = "text/javascript" 
+                src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script type = "text/javascript" language = "javascript">
+                 $(document).ready(function(){
+                      $("#submit_button").on('click', function(){ 
+                       //var useremail =$("#user_email").val();
+                        var request = $.ajax({
+                              url: "http://localhost:2016/user/forgotpwd",
+                              method: "POST",
+                              data: {"useremail":$("#user_email").val()}
+                                });//ajax
+                                request.done(function( data ) {
+                                console.log(data);
+                                if(data){
+                                          alert("password sent to your mail");
+                                          window.location ="login.html";
+                                            }
+                                else{
+                                    alert("something went wrong");
+                                }  
+                            });//done
+
+
+
+                      }); 
+                  });
+ </script>
+    </head>
+    <body>
+        <div id="chat-login-wrapper">
+            <h1>Forgot Password</h1>
+            <form id="chat-signup">
+                <input id="user_email" type="text" placeholder="enter your email address" autofocus />                    <input id="submit_button" type="button" value="GetPassword" />
+            </form>
+        </div>
+        
+    </body>
+</html>

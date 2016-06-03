@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Signup Form</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+                <script type = "text/javascript" 
+                src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script type = "text/javascript" language = "javascript">
+                // Attach a submit handler to the form
+               $(document).ready(function(){
+                var info= {};
+
+                var password, confirmpassword;
+                  $("#submit_button").on('click', function(){
+
+                    
+                     info.useremail = $("#user_email").val(),
+                    info.username =$("#user_name").val(),
+                     password =$("#password_first").val(),
+                    confirmpassword = $("#password_confirm").val();
+
+                     if(password === confirmpassword){
+                     info.password = $("#password_first").val();
+
+                                       var request = $.ajax({
+                                  url: "http://localhost:2016/user/add",
+                                  method: "POST",
+                                  data: info
+                                    });
+                                request.done(function( data ) {
+                                        console.log(data);
+                                        if(data){
+                                            if(data.msg){
+                                                if(data.msg == 'success'){
+                                                    alert("data inserted properly");
+                                                    window.location='login.html';
+                                                }
+                                            }else{
+                                                alert("Error at server side");
+                                            }
+                                        }else{
+                                            alert("something went wrong");
+                                        }               
+                                 });
+                                 
+                                request.fail(function( jqXHR) {
+                                  alert( "Request failed, start the server "  );
+                                });
+                                /*request.always(function() {
+                                alert( "finished" );
+                                });*/
+                     
+              
+                 } else{alert("password doesnot match with confirm password");}
+        });
+});
+
+                  
+        </script>
+
+
+    </head>
+    <body>
+   
+        <div id="chat-login-wrapper">
+            <h1>SignUp Here!</h1>
+            <form id="signup" action="" method="POST">
+
+            Email Id<input id="user_email" type="text" placeholder="enter your email address" autofocus />
+            Name<input id="user_name" type="text" placeholder="enter your name" />
+            Password <input id="password_first" type="password" placeholder="enter a password" />
+            Confirm password<input id="password_confirm" type="password" placeholder="re-type your password" />
+                <input id="submit_button" type="button" value="Submit" />
+
+            </form>
+         </div>
+    </body>
+</html>
+
+

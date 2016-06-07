@@ -12,13 +12,13 @@ module.exports = {
             var mailOptions={
                 to : to,
                 subject : subj,
-                text : text
+                html : text
             };
             smtpTransport.sendMail(mailOptions, function(error, response){
             	if(error){
                 console.log(error);
                 }else{
-                console.log("Mail sent");
+                console.log("Mail sent" +response.message);
                 }
                 return true;
             });

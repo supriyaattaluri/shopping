@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Editprofile</title>
+        <style>
+         #firstdiv{
+                  margin-right: 50px;
+                   float:right;
+               }
+        </style>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type = "text/javascript" 
+                src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type = "text/javascript" language = "javascript">
+             $(document).ready(function(){
+              var res = localStorage.getItem("usersdata");
+                if(res!= null){
+              var edituser= localStorage.getItem("usersdata");
+                  var result = JSON.parse(edituser); 
+                  var id = result[0]._id;
+                  var password, confirmpassword;
+                $("#changePassword").on('click', function(){
+                        password =$("#newPwd").val(),
+                        confirmpassword = $("#confirmPwd").val();
+                         if(password === confirmpassword){           
+                              var request = $.ajax({
+                              url: "http://localhost:2016/user/changepwd/"+id,
+                              method: "POST",
+                              data: {"password":$("#newPwd").val()}
+                                });//ajax
+                                request.done(function( data ) {
+                                console.log(data);
+                                if(data){
+                                          alert("changed password");
+                                          window.location ="login.html";
+                                            }
+                                else{
+                                    alert("something went wrong");
+                                }  
+                            });//done
+                        }
+                        else
+                        {alert("password doesnot match with confirm password");} 
+                });//onclick
+            }else{
+              window.location ="login.html";
+            }
+             $("#logout").on('click', function(){
+                localStorage.removeItem("usersdata");
+                alert("loged out successfully");
+                window.location='login.html';
+              });
+        });
+        </script>
+    </head>
+    <body>
+    <div id="firstdiv">
+        <a id="logout" href ="logout.html">LogOut</a>
+    </div>
+    <div id="chat-login-wrapper">
+            <h1>Edit your profile</h1>
+            <form id="changepwd" action="" method="POST">
+                Current password<input id="currPwd" type="password" placeholder="enter current password" />
+                New password<input id="newPwd" type="password" placeholder="enter new password" />
+                Confirm password<input id="confirmPwd" type="password" placeholder="retype new password" />
+                <input id="changePassword" type="button" value="changePassword" />
+            </form>
+    </div>
+    </body>
+</html>
+
+

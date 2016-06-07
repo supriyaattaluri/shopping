@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Form</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type = "text/javascript" 
+                src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script type = "text/javascript" language = "javascript">
+                 $(document).ready(function(){
+                   /*var res = localStorage.getItem("usersdata");
+                   console.log(res);
+                   if(res!= null){
+                    window.location="dashboard.html";
+                  }
+                    else{*/
+                   var info= {};
+                      $("#submit_button").on('click', function(){                  
+                       info.useremail = $("#user_email").val(),
+                       info.password =$("#user_password").val();
+                     
+                                   
+                  var request = $.ajax({
+                  url: "http://localhost:2016/user/login",
+                  method: "POST",
+                  data: info
+                  });
+                request.done(function( udata ) {
+                        console.log(udata);
+                        if(udata){
+                                  if(udata.msg =="password doesnot match"){
+                                  alert("password doesnot match");
+                                  window.location = "login.html";
+                                }
+                                  else{
+                                  localStorage.setItem("usersdata", JSON.stringify(udata));
+                                  if(udata[0].resetBy == 'server'){
+                                    alert("login success");
+                                    window.location='changepwd.html';
+                                  }else{
+                                    alert("sucess login");
+                                    window.location='dashboard.html';
+                                  }
+                                    
+                                  
+                                  }//else
+                               }//udata if
+                              else{
+                            alert("something went wrong");
+                            }               
+                   });
+                 
+                request.fail(function( jqXHR) {
+                  alert( "Request failed, start the server "  );
+               });
+           
+         });
+      
+
+});
+ </script>
+    </head>
+    <body>
+        <div id="chat-login-wrapper">
+            <h1>Login Here</h1>
+            <form id="chat-signup">
+                <input id="user_email" type="text" placeholder="enter your email address" autofocus />
+                <input id="user_password" type="password" placeholder="enter your password" />
+                <a href = "forgotpwd.html">Forgot Password?</a>
+                <input id="submit_button" type="button" value="Submit" />
+            </form>
+        </div>
+        
+    </body>
+</html>

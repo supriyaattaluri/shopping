@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Editprofile</title>
+        <style>
+         #firstdiv{
+                  margin-right: 50px;
+                   float:right;
+               }
+        </style>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type = "text/javascript" 
+                src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type = "text/javascript" language = "javascript">
+             $(document).ready(function(){
+
+              var edituser= localStorage.getItem("usersdata");
+                  var result = JSON.parse(edituser); 
+                  var id = result[0]._id;
+                  $('#user_name').val(result[0].username);
+                $("#editprofile").on('click', function(){
+                  
+                  //document.getElementById("user_name").value=result[0].username;
+                  //$("#user_name").text(result[0].username);
+
+                   //username = $("#user_name").val();
+
+                     var request = $.ajax({
+                      url: "http://localhost:2016/user/editprofile/"+id,
+                      method: "PUT",
+                      data: {"username":$("#user_name").val()}
+                        });
+                    request.done(function( data ) {
+                            console.log(data);
+                            if(data){
+                                      result[0].username = $("#user_name").val();
+                                      localStorage.removeItem("usersdata");
+                                      localStorage.setItem("usersdata", JSON.stringify(result));
+                                      alert("username updated properly");
+                                      window.location ="dashboard.html";
+                                        }
+                            else{
+                                alert("something went wrong");
+                            }               
+                    });
+                });
+
+
+             $("#logout").on('click', function(){
+                localStorage.removeItem("usersdata");
+                alert("loged out successfully");
+                window.location='login.html';
+              });
+        });
+        </script>
+    </head>
+    <body>
+    <div id="firstdiv">
+        <a id="logout" href ="logout.html">LogOut</a>
+    </div>
+    <div id="chat-login-wrapper">
+            <h1>Edit your profile</h1>
+            <form id="changepwd" action="" method="POST">
+                Name<input id="user_name" type="text" placeholder="enter your name" />
+                <input id="editprofile" type="button" value="update" />
+
+            </form>
+    </div>
+    </body>
+</html>
+
+

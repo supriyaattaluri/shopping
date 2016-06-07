@@ -9,7 +9,10 @@ module.exports = function(mongoose) {
     useremail: String,
     username: String,
     password: String,
-    confirmpassword: String
+    resetBy: {
+        type: String,
+        enum: ['server', 'user']
+      }
 
     });
 

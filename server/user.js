@@ -44,10 +44,15 @@ else
 });   
 
 router.post('/login', function(req,res){
-    user.find({ 'useremail': req.body.useremail}, function (err, Userdata) {
-    	//console.log(Userdata);
-    if(err){console.log( err.stack());}
+     user.find({ 'useremail': req.body.useremail}, function (err, Userdata) {
+      console.log(Userdata);
+    	    if(err){
+            console.log( err.stack());
+          }
+          console.log(Userdata.password);
        if(Userdata[0].password === req.body.password){
+        
+        console.log(req.body.password);
        	//res.json({"msg":"success"});
            res.json(Userdata);
         }else{

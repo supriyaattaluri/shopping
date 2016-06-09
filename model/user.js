@@ -14,6 +14,7 @@ module.exports = function(mongoose) {
         enum: ['server', 'user']
       }
 
+
     });
 
    

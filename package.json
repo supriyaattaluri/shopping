@@ -1,0 +1,39 @@
+{
+  "name": "shopping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "consolidate": "^0.14.1",
+    "cors": "^2.7.1",
+    "crypto": "^0.0.3",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.20",
+    "nodemailer": "^0.7.1",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2",
+    "grunt-open": "^0.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supriyaattaluri/shopping.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supriyaattaluri/shopping/issues"
+  },
+  "homepage": "https://github.com/supriyaattaluri/shopping#readme"
+}
